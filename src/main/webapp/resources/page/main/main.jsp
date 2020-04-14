@@ -11,7 +11,7 @@
 
 <%--<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>--%>
 <%--<img alt="logo" src="<html:rewrite page="" width="100%" height="20%"/>--%>
-
+<%--git test--%>
 
 <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 <fmt:setBundle basename="locale" var="locale"/>

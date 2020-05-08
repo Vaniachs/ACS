@@ -281,13 +281,13 @@ public class OrderCrudRepositoryImpl extends AbstractRepository implements Order
              PreparedStatement statement = connection.prepareStatement(SQL_ORDER_UPDATE)) {
             statementChecks0.executeQuery(SET_FOREIGN_KEY_CHECKS_0); // поместить в очередь?
             statement.setInt(1, order.getUserId());
-            statement.setLong(2, order.getCoordinates());
+            statement.setString(2, order.getCoordinates());
             statement.setString(3, order.getDestinationPoint());
             statement.setBigDecimal(4, order.getPrice());
             statement.setString(5, order.getComment());
             statement.setString(6, order.getCarClass().name());
             statement.setBoolean(7, order.isCompleted());
-            statement.setLong(8, order.getDestinationCoordinates());
+            statement.setString(8, order.getDestinationCoordinates());
             statement.setInt(9, order.getDriverId());
             statement.setBoolean(10, order.isStarted());
             statement.executeUpdate();

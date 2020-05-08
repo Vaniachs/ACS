@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,10 +97,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order makeOrder(int userId,String address, String carClass, String comment) throws ServiceException{
+    public Order makeOrder(int userId, String address, String carClass, String comment, String coordinates,
+                           String destinationCoordinates) throws ServiceException{
         try {
-            long coordinates = CoordinatesGenerator.generate();
-            long destinationCoordinates = CoordinatesGenerator.generate();
             Order order = new Order(userId, coordinates, address, comment, CarClass.valueOf(carClass.toUpperCase()),
                     destinationCoordinates);
             orderCrudRepository.save(order);
@@ -173,7 +173,16 @@ public class OrderServiceImpl implements OrderService {
     public List<BigDecimal> calculateOrderPricePerDriver(List<Driver> drivers, Order order){
             List<BigDecimal> prices = new ArrayList<>();
             for (Driver driver : drivers) {
-                double price = Math.abs(driver.getCoordinates() - order.getCoordinates()) / 100000000.0;
+                int delim = driver.getCoordinates().indexOf(",");
+                double latitudeDriver = Double.valueOf(driver.getCoordinates().substring(0, delim));
+                double longitudeDriver = Double.valueOf((driver.getCoordinates().substring(delim + 1)));
+
+                delim = order.getCoordinates().indexOf(",");
+                double latitudeOrder = Double.valueOf((driver.getCoordinates().substring(0, delim)));
+                double longitudeOrder = Double.valueOf((driver.getCoordinates().substring(delim + 1)));
+
+                double price = Math.sqrt(((latitudeDriver - latitudeOrder) * (latitudeDriver - latitudeOrder)) +
+                        ((longitudeDriver - longitudeOrder) * (longitudeDriver - longitudeOrder)));
                 price *= driver.getPricePerKm().doubleValue();
                 BigDecimal bigDecimal = BigDecimal.valueOf(price);
                 prices.add(bigDecimal);

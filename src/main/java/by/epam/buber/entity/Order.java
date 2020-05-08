@@ -12,9 +12,9 @@ public class Order {
     private int id;
     private int userId;
     private int driverId;
-    private long coordinates;
+    private String coordinates;
     private String destinationPoint;
-    private long destinationCoordinates;
+    private String destinationCoordinates;
     private BigDecimal price;
     private String comment;
     private CarClass carClass;
@@ -45,8 +45,8 @@ public class Order {
         this.carClass = carClass;
     }
 
-    public Order(int userId, long coordinates, String destinationPoint, String comment, CarClass carClass,
-                 long destinationCoordinates) {
+    public Order(int userId, String coordinates, String destinationPoint, String comment, CarClass carClass,
+                 String destinationCoordinates) {
         this.userId = userId;
         this.coordinates = coordinates;
         this.destinationPoint = destinationPoint;
@@ -57,7 +57,7 @@ public class Order {
         this.completed = false;
     }
 
-    public Order(int id, long coordinates, String destinationPoint) {
+    public Order(int id, String coordinates, String destinationPoint) {
         this.id = id;
         this.coordinates = coordinates;
         this.destinationPoint = destinationPoint;
@@ -131,11 +131,11 @@ public class Order {
         this.driverId = driverId;
     }
 
-    public long getCoordinates() {
+    public String getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(long coordinates) {
+    public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
     }
 
@@ -147,11 +147,11 @@ public class Order {
         this.destinationPoint = destinationPoint;
     }
 
-    public long getDestinationCoordinates() {
+    public String getDestinationCoordinates() {
         return destinationCoordinates;
     }
 
-    public void setDestinationCoordinates(long destinationCoordinates) {
+    public void setDestinationCoordinates(String destinationCoordinates) {
         this.destinationCoordinates = destinationCoordinates;
     }
 

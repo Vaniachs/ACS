@@ -11,7 +11,7 @@ public interface DriverCrudRepository extends CrudRepository<Integer, Driver> {
     void setBusyById(Integer id, boolean busy) throws DaoException;
     void setOrderToDriver(Order order, Integer id) throws DaoException;
     boolean isDriverBusy(Integer driverId) throws DaoException;
-    void setDriverCoordinates(Integer driverId, long coordinates) throws DaoException;
+    void setDriverCoordinates(Integer driverId, String coordinates) throws DaoException;
     void setDriverActive(Integer driverId, boolean active) throws DaoException;
     List<Driver> getAbleDriversByCarClass(CarClass carClass) throws DaoException;
 

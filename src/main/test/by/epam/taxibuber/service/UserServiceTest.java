@@ -76,7 +76,7 @@ public class UserServiceTest {
 
     @Test
     public void showAbleDriversTestTrue() throws ServiceException, DaoException {
-        userService.showAbleDrivers(0, CarClass.BUDGET);
+        userService.showAbleDrivers("57.45456,56.34343", CarClass.BUDGET);
         verify(driverCrudRepository, atLeastOnce()).getAbleDriversByCarClass(any());
     }
 

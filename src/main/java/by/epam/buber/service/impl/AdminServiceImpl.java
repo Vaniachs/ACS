@@ -124,7 +124,7 @@ public class AdminServiceImpl implements AdminService {
     public void signUpDriver(Driver driver) throws ServiceException {
         try {
             driver.setPassword(passwordEncoder.encode(driver.getPassword()));
-            driver.setCoordinates(CoordinatesGenerator.generate());
+            //driver.setCoordinates(CoordinatesGenerator.generate());
             driverCrudRepository.save(driver);
             logger.info("New driver has been signed up");
         }catch (DaoException e){

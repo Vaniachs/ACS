@@ -8,7 +8,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface OrderService {
-    Order makeOrder(int userId, String address, String carClass, String comment) throws ServiceException;
+    Order makeOrder(int userId, String address, String carClass, String comment, String coordinates,
+                    String destinationCoordinates) throws ServiceException;
     Order takeCurrentOrderForDriver(int id) throws ServiceException;
     Order takeCurrentOrderForUser(int id) throws ServiceException;
     boolean orderMade(int userId) throws ServiceException;

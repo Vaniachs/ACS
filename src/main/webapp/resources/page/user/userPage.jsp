@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/user.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
     <script src="${pageContext.request.contextPath}/resources/js/user.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=4e68b0af-dc3a-421a-aae6-b8d5c48cfa6d&lang=ru_RU" type="text/javascript">
+    </script>
+    <script src="${pageContext.request.contextPath}/resources/js/map.js"></script>
 </head>
 <body>
 <div class="background">
@@ -88,8 +91,6 @@
                     </div>
                 </div>
             </div>
-            <jsp:useBean id="ordered" scope="request" type="java.lang.Boolean"/>
-            <c:if test="${!ordered}">
             <div class="col-lg-4 col-sm-3 ml-left">
                 <section class="features" id="features">
                     <div class="Make an order">
@@ -120,12 +121,18 @@
                                     <input type="submit" class="submit" name="button" id="ss" value=
                                             "<fmt:message key="text.newOrder.makeOrder.button" bundle="${locale}"/>">
                                 </p>
+                                <p class="field">
+                                    <input type="text" name="source_coords_for_lazy_man" id = "source_coords_for_lazy_man" hidden="true">
+                                </p>
+                                <p class="field">
+                                    <input type="text" name="destinations_coords_for_lazy_man" id = "destinations_coords_for_lazy_man" hidden="true">
+                                </p>
                             </form>
                         </div>
+                        <div id="map" class = "user_position"></div>
                     </div>
                 </section>
             </div>
-            </c:if>
         </div>
     </div>
 

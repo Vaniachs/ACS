@@ -122,10 +122,10 @@ public class DriverCrudRepositoryImpl extends AbstractRepository implements Driv
     }
 
     @Override
-    public void setDriverCoordinates(Integer driverId, long coordinates) throws DaoException {
+    public void setDriverCoordinates(Integer driverId, String coordinates) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_DRIVER_UPDATE_COORDINATES_BY_ID)) {
-            statement.setLong(1, coordinates);
+            statement.setString(1, coordinates);
             statement.setInt(2, driverId);
             statement.executeUpdate();
         }
@@ -171,7 +171,7 @@ public class DriverCrudRepositoryImpl extends AbstractRepository implements Driv
             converter.statementSetParticipant(statement, driver);
             statement.setBoolean(7, driver.isActive());
             statement.setBoolean(8, driver.isBusy());
-            statement.setLong(9, driver.getCoordinates());
+            statement.setString(9, driver.getCoordinates());
             statement.setBigDecimal(10, driver.getPricePerKm());
             statement.setString(11, driver.getCar().getMark());
             statement.setString(12, driver.getCar().getModel());
@@ -199,7 +199,7 @@ public class DriverCrudRepositoryImpl extends AbstractRepository implements Driv
                  statement.setInt(8, driver.getId());
                  statement.setBoolean(9, driver.isActive());
                  statement.setBoolean(10, driver.isBusy());
-                 statement.setLong(11, driver.getCoordinates());
+                 statement.setString(11, driver.getCoordinates());
                  statement.setBigDecimal(12, driver.getPricePerKm());
                  statement.setInt(13, driver.getId());
                  statement.setString(14, driver.getCar().getMark());

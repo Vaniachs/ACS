@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class Driver extends TaxiParticipant {
     private Car car;
-    private long coordinates;
+    private String coordinates;
     private boolean active;
     private boolean busy;
     private BigDecimal pricePerKm;
@@ -65,11 +65,11 @@ public class Driver extends TaxiParticipant {
         this.car = new Car(car);
     }
 
-    public long getCoordinates() {
+    public String getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(long coordinates) {
+    public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
     }
 

@@ -43,8 +43,8 @@ public class UserServiceImpl implements UserService {
                     if (passwordEncoder.checkPassword(password, taxiParticipant.getPassword())) {
                         if (taxiParticipant.getRole() == Role.DRIVER) {
                             driverCrudRepository.setDriverActive(taxiParticipant.getId(), true);
-                             driverCrudRepository.setDriverCoordinates(taxiParticipant.getId(),
-                                     CoordinatesGenerator.generate());
+//                             driverCrudRepository.setDriverCoordinates(taxiParticipant.getId(),
+//                                     CoordinatesGenerator.generate());
                              logger.info("Driver signed in");
                         }
                         logger.info("User signed in");
@@ -157,12 +157,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Driver> showAbleDrivers(long destinationCoordinates, CarClass carClass) throws ServiceException {
+    public List<Driver> showAbleDrivers(String destinationCoordinates, CarClass carClass) throws ServiceException {
         try {
             List<Driver> drivers = driverCrudRepository.getAbleDriversByCarClass(carClass);
             List<Driver> ableDrivers = new ArrayList<>();
             for (Driver driver : drivers) {
-                if (Math.abs(driver.getCoordinates() - destinationCoordinates) < MIN_DISTANCE) {
+                int delim = driver.getCoordinates().indexOf(",");
+                double latitudeDriver = Double.valueOf(driver.getCoordinates().substring(0, delim));
+                double longitudeDriver = Double.valueOf((driver.getCoordinates().substring(delim + 1)));
+
+                delim = destinationCoordinates.indexOf(",");
+                double latitudeOrder = Double.valueOf((driver.getCoordinates().substring(0, delim)));
+                double longitudeOrder = Double.valueOf((driver.getCoordinates().substring(delim + 1)));
+
+                double distance = Math.sqrt(((latitudeDriver - latitudeOrder) * (latitudeDriver - latitudeOrder)) +
+                        ((longitudeDriver - longitudeOrder) * (longitudeDriver - longitudeOrder)));
+                if (distance < MIN_DISTANCE) {
                     ableDrivers.add(driver);
                 }
             }

@@ -94,7 +94,8 @@ public class OrderServiceTest {
 
     @Test
     public void makeOrderTest() throws ServiceException, DaoException{
-        orderService.makeOrder(0, "", "budget", "");
+        orderService.makeOrder(0, "", "budget", "",
+                "57.45456,56.34343", "47.45456,58.34343");
         verify(orderCrudRepository, atLeastOnce()).save(any(Order.class));
     }
 

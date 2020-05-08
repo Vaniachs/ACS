@@ -27,9 +27,9 @@ public class ResultSetConverter {
         Order order = new Order();
         try {
             order.setId(resultSet.getInt(OrderField.ID));
-            order.setCoordinates(resultSet.getLong(OrderField.COORDINATES));
+            order.setCoordinates(resultSet.getString(OrderField.COORDINATES));
             order.setDestinationPoint(resultSet.getString(OrderField.DESTINATION_POINT));
-            order.setDestinationCoordinates(resultSet.getLong(OrderField.DESTINATION_COORDINATES));
+            order.setDestinationCoordinates(resultSet.getString(OrderField.DESTINATION_COORDINATES));
             order.setPrice(resultSet.getBigDecimal(OrderField.PRICE));
             order.setComment(resultSet.getString(OrderField.ORDER_COMMENT));
             order.setCarClass(CarClass.valueOf(resultSet.getString(OrderField.CAR_CLASS)));
@@ -76,7 +76,7 @@ public class ResultSetConverter {
             driver = (Driver)convertParticipantFromResultSet(resultSet, driver);
             driver.setActive(resultSet.getBoolean(DriverField.ACTIVE));
             driver.setBusy(resultSet.getBoolean(DriverField.BUSY));
-            driver.setCoordinates(resultSet.getLong(DriverField.COORDINATES));
+            driver.setCoordinates(resultSet.getString(DriverField.COORDINATES));
             driver.setPricePerKm(resultSet.getBigDecimal(DriverField.PRICE_PER_KM));
             Car car = new Car();
             car.setMark(resultSet.getString(CarField.MARK));

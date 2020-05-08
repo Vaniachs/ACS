@@ -12,6 +12,8 @@ public final class RequestAttribute {
     public static final String MODEL = "model";
 
     public static final String ADDRESS = "address";
+    public static final String SOURCE_COORDINATES = "source_coords_for_lazy_man";
+    public static final String DESTINATION_COORDINATES = "destinations_coords_for_lazy_man";
     public static final String CLASS = "class";
     public static final String COMMENT = "comment";
 

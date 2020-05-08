@@ -29,10 +29,15 @@ public class PostNewOrder implements Command {
         OrderService orderService = serviceFactory.getOrderService();
         HttpSession session = request.getSession();
 
+        String sourceCoordinates = request.getParameter(RequestAttribute.SOURCE_COORDINATES);
+        String destinationCoordinates = request.getParameter(RequestAttribute.DESTINATION_COORDINATES);
         Order order = orderService.makeOrder((Integer) session.getAttribute(SessionAttribute.USER_ID_ATTRIBUTE),
                 request.getParameter(RequestAttribute.ADDRESS),
                 request.getParameter(RequestAttribute.CLASS),
-                request.getParameter(RequestAttribute.COMMENT));
+                request.getParameter(RequestAttribute.COMMENT),
+                sourceCoordinates,
+                destinationCoordinates);
+
         response.sendRedirect(Redirect.USER_DRIVERS_REDIRECT);
         }catch (ServiceException e){
             logger.error("error during creating a new order", e);

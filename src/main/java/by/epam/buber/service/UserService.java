@@ -15,5 +15,5 @@ public interface UserService {
             throws ServiceException;
     void sendDriverRequest(int driverId, int userId) throws ServiceException;
     boolean driverRequested(int orderId) throws ServiceException;
-    List<Driver> showAbleDrivers(long destinationCoordinates, CarClass carClass) throws ServiceException;
+    List<Driver> showAbleDrivers(String destinationCoordinates, CarClass carClass) throws ServiceException;
 }

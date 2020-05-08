@@ -5,6 +5,7 @@ import by.epam.buber.controller.util.Page;
 import by.epam.buber.controller.util.RequestAttribute;
 import by.epam.buber.controller.util.SessionAttribute;
 import by.epam.buber.entity.Order;
+import by.epam.buber.entity.participant.Driver;
 import by.epam.buber.exception.ControllerException;
 import by.epam.buber.exception.ServiceException;
 import by.epam.buber.service.AdminService;
@@ -42,10 +43,14 @@ public class GetUserOrder implements Command {
             boolean accepted = orderService.acceptedOrder(currentOrder.getId());
             if(accepted){
                 String phone = adminService.getParticipantById(currentOrder.getDriverId()).getPhoneNumber();
+                String carMark = ((Driver)adminService.getParticipantById(currentOrder.getDriverId())).getCar().getMark();
+                String carModel = ((Driver)adminService.getParticipantById(currentOrder.getDriverId())).getCar().getModel();
                 request.setAttribute(RequestAttribute.PHONE, phone);
+                request.setAttribute(RequestAttribute.CAR_INFO, carMark + " " + carModel);
             }
             else{
                 request.setAttribute(RequestAttribute.PHONE, "");
+                request.setAttribute(RequestAttribute.CAR_INFO, "");
             }
             request.setAttribute(RequestAttribute.CURRENT_ORDER, currentOrder);
         }

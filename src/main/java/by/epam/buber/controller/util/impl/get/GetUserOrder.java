@@ -7,6 +7,7 @@ import by.epam.buber.controller.util.SessionAttribute;
 import by.epam.buber.entity.Order;
 import by.epam.buber.exception.ControllerException;
 import by.epam.buber.exception.ServiceException;
+import by.epam.buber.service.AdminService;
 import by.epam.buber.service.OrderService;
 import by.epam.buber.service.ServiceFactory;
 import by.epam.buber.service.UserService;
@@ -29,13 +30,23 @@ public class GetUserOrder implements Command {
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         OrderService orderService = serviceFactory.getOrderService();
         UserService userService = serviceFactory.getUserService();
+        AdminService adminService = serviceFactory.getAdminService();
         HttpSession session = request.getSession();
 
         Order currentOrder = orderService.takeCurrentOrderForUser((Integer) session.getAttribute(SessionAttribute.USER_ID_ATTRIBUTE));
         boolean ordered = currentOrder != null;
         request.setAttribute(RequestAttribute.ORDERED, ordered);
         if(ordered) {
-            request.setAttribute(RequestAttribute.DRIVER_REQUESTED, userService.driverRequested(currentOrder.getId()));
+            boolean requested = userService.driverRequested(currentOrder.getId());
+            request.setAttribute(RequestAttribute.DRIVER_REQUESTED,requested);
+            boolean accepted = orderService.acceptedOrder(currentOrder.getId());
+            if(accepted){
+                String phone = adminService.getParticipantById(currentOrder.getDriverId()).getPhoneNumber();
+                request.setAttribute(RequestAttribute.PHONE, phone);
+            }
+            else{
+                request.setAttribute(RequestAttribute.PHONE, "");
+            }
             request.setAttribute(RequestAttribute.CURRENT_ORDER, currentOrder);
         }
         else {

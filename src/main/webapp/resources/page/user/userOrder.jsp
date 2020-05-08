@@ -91,6 +91,7 @@
 
             <jsp:useBean id="driverRequested" scope="request" type="java.lang.Boolean"/>
             <jsp:useBean id="ordered" scope="request" type="java.lang.Boolean"/>
+            <jsp:useBean id="phone" scope="request" type="java.lang.String"/>
 
             <c:if test="${ordered}">
                 <jsp:useBean id="currentOrder" scope="request" type="by.epam.buber.entity.Order"/>
@@ -157,6 +158,7 @@
                             <div class="warning">
                                 <hr width="95%" color="#fff" align="right" size="10">
                                 <h5><fmt:message key="text.userCurrentOrder.accepted" bundle="${locale}"/></h5>
+                                <h5>"${phone}"</h5>
                             </div>
                         </c:if>
                         </c:if>

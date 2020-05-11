@@ -33,13 +33,13 @@ create table carorder
   id                     int auto_increment
     primary key,
   userId                 int                                    null,
-  coordinates            bigint                                 null,
+  coordinates            varchar(40)                            null,
   destinationPoint       varchar(40)                            null,
   price                  double                                 null,
   orderComment           varchar(256)                           null,
   carClass               enum ('BUDGET', 'COMFORT', 'BUSINESS') not null,
   completed              tinyint(1)                             null,
-  destinationCoordinates bigint                                 null,
+  destinationCoordinates varchar(40)                            null,
   driverId               int                                    null,
   started                tinyint(1)                             not null,
   constraint driverId
@@ -53,7 +53,7 @@ create table driver
   participantId int        null,
   active        tinyint(1) null,
   busy          tinyint(1) null,
-  coordinates   bigint     null,
+  coordinates   varchar(40) null,
   pricePerKm    double     null,
   id            int auto_increment
     primary key,
